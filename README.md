@@ -22,7 +22,9 @@ This idea is originated after I read the paper on [ Evidential Deep Learning ](h
 # Results:
 You should get several graphs like this after running the script(s). 
 
+![](in_dist.png)
 
 
+This shows that the student network is able to learn the distribution properly. I calculated the correlation of the two models, and they are 0.6 and 0.4 for in-distribution and out-of-distribution respectively. Not too great but not bad either.
 
   
