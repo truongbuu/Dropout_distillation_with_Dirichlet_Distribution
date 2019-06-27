@@ -13,6 +13,9 @@ This idea is originated after I read the paper on [ Evidential Deep Learning ](h
 - Tensorflow: 1.13.1
 - Tensorflow Probability package.
 
+# Instructions:
+- In the same folder, create the two following folders
+
 
 
   
