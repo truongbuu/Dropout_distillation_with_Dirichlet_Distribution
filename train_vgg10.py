@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
     bsize = 1000 #batch size
     n_batches = 50000 // bsize
-    for epoch in range(200):
+    for iteration in range(200):
         s = 0
         for i in range(n_batches):
             #data, label = mnist.train.next_batch(bsize)
@@ -146,7 +146,7 @@ if __name__ == '__main__':
             s = s+bsize
             feed_dict={X_vgg:data, Y_vgg:labels,is_training:True, is_training_dropout: True}
             sess.run(step,feed_dict)
-            print('epoch %d - %d%%) '% (epoch+1, (100*(i+1))//n_batches), end='\r' if i<n_batches-1 else '')
+            print('iteration %d - %d%%) '% (iteration+1, (100*(i+1))//n_batches), end='\r' if i<n_batches-1 else '')
 
         train_acc =(sess.run(prob,feed_dict={X_vgg: x_train[:1000],is_training:False, is_training_dropout: False}).argmax(axis = -1) == y_train[:1000].argmax(axis = -1)).sum()/1000.
         val_acc =(sess.run(prob,feed_dict={X_vgg: x_test[:1000],is_training:False, is_training_dropout: False}).argmax(axis = -1) == y_test[:1000].argmax(axis = -1)).sum()/1000.

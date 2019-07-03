@@ -252,7 +252,7 @@ if __name__ == '__main__':
     #start training
     bsize = 1000 #batch size
     n_batches = 50000 // bsize
-    for epoch in range(250):
+    for iteration in range(250):
         s = 0
         for i in range(n_batches):
             z = datagen.flow(x_train[s:s+bsize],y_train[s:s+bsize],bsize)[0]
@@ -266,8 +266,8 @@ if __name__ == '__main__':
             y_prob = np.array(y_prob)
             feed_dict={X_distill:data, Y_distill:y_prob,is_training_distill:True, is_training_dropout_distill: True, learning_rate: 0.001}
             sess_distill.run([step_distill],feed_dict)
-            print('epoch %d - %d%%) '% (epoch+1, (100*(i+1))//n_batches), end='\r' if i<n_batches-1 else '')
-        if (epoch+1) %20 == 0:
+            print('iteration %d - %d%%) '% (iteration+1, (100*(i+1))//n_batches), end='\r' if i<n_batches-1 else '')
+        if (iteration+1) %20 == 0:
             saver_distill.save(sess_distill, 'cifar10vgg_distill/mymodel_distill')
         train_acc =(sess_distill.run(mean_prob_distill,feed_dict={X_distill: x_train[:bsize],is_training_distill:False, is_training_dropout_distill: False}).argmax(axis = -1) == y_train[:bsize].argmax(axis = -1)).sum()/1000.
         val_acc =(sess_distill.run(mean_prob_distill,feed_dict={X_distill: x_test[:bsize],is_training_distill:False, is_training_dropout_distill: False}).argmax(axis = -1) == y_test[:bsize].argmax(axis = -1)).sum()/1000.
